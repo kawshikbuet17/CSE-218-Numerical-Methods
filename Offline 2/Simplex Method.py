@@ -76,7 +76,7 @@ while True:
     else:
         commands.append(line)
         count+=1
-#print(len(commands))
+
 m = count-1
 list = []
 list = [float(j) for j in commands[0].split()]
@@ -96,28 +96,18 @@ for i in range(m):
 for i in range(m):
     mainlist[i+1][n+i] = 1
 f.close()
-p=0
-#print(mainlist)
-while nonNegative(mainlist)==False and p<=2:
-    a = solving_By_Simplex_Method(mainlist, n, m)
-#    print(a)
-#a = solving_By_Simplex_Method(mainlist, n, m)
-#a = solving_By_Simplex_Method(mainlist, n, m)
-for i in range(m+1):
-    for j in range(n+m+1):
-        print(a[i][j], end='\t')
-    print()
-#print(a)
 
-#print(lowest_Intercept(a, n, m))
-#a = solving_By_Simplex_Method(mainlist, n, m)
-#print(a)
+while nonNegative(mainlist)==False:
+    a = solving_By_Simplex_Method(mainlist, n, m)
+    for i in range(m+1):
+        for j in range(n+m+1):
+            print(str(round(a[i][j], 2)), end=' \t')
+        print()
+    print()
+
+
 print("Highest value of Z is : ", mainlist[0][n+m])
 x = value_of_x(a, n, m)
 for i in range(len(x)):
     indx = i+1
     print("x"+str(indx)+" is \t"+str(x[i]))
-    
-print()
-print()
-
