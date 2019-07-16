@@ -26,12 +26,12 @@ def intercept(list, n, m):
         try:
             list[i][n+m+1] = list[i][n+m]/list[i][index_j]
         except:
-            list[i][n+m+1] = 10000000
+            list[i][n+m+1] = 10000000000
 
 def lowest_Intercept(list, n, m):
     intercept(list, n, m)
     index_i=1 
-    min = 1000000000
+    min = 10000000000
     for i in range(1, m+1):
         if list[i][n+m+1]>0:
             if min>list[i][n+m+1] :
