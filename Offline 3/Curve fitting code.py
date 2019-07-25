@@ -78,6 +78,7 @@ def LinearRegression(m, n, listx, listy):
 
     
     a = get_Solution(matrix, m+1, B)
+    #a = np.linalg.solve(matrix,B)
     return a
 
 def Regression_Coefficient(listx, listy, n, m):
@@ -123,7 +124,7 @@ for i in range(len(commands)):
 listx = np.array(listx)
 listy = np.array(listy)
 plt.figure(figsize=(15,10))
-plt.scatter(listx, listy, s=1)
+plt.scatter(listx, listy, s=2)
 
 
 
@@ -136,14 +137,17 @@ for i in range(n):
     for j in range(m+1):
         y = y+a[j]*(np.power(listx[i], j))
     ynew.append(y)
+print("Parameters of Order", m, ":")
+for i in range(m+1):
+    print("a"+str(i)+" =",round(a[i],4))
 print("regression coefficient of order",m, "is", Regression_Coefficient(listx, listy, n, m))
-
+print()
 x = [i for i in listx]
 for i in range(n):
-    for j in range(n):
-        if x[j]>x[i]:
-            x[i], x[j] = x[j], x[i]
-            ynew[i], ynew[j] = ynew[j], ynew[i]
+    for j in range(n-i-1):
+        if x[j+1]>x[j]:
+            x[j+1], x[j] = x[j], x[j+1]
+            ynew[j+1], ynew[j] = ynew[j], ynew[j+1]
 plt.plot(x, ynew, label="Order 1")
 
 
@@ -157,13 +161,17 @@ for i in range(n):
     for j in range(m+1):
         y = y+a[j]*(np.power(listx[i], j))
     ynew.append(y)
+print("Parameters of Order", m, ":")
+for i in range(m+1):
+    print("a"+str(i)+" =",round(a[i],4))
 print("regression coefficient of order",m,"is",Regression_Coefficient(listx, listy, n, m))
+print()
 x = [i for i in listx]
 for i in range(n):
-    for j in range(n):
-        if x[j]>x[i]:
-            x[i], x[j] = x[j], x[i]
-            ynew[i], ynew[j] = ynew[j], ynew[i]
+    for j in range(n-i-1):
+        if x[j+1]>x[j]:
+            x[j+1], x[j] = x[j], x[j+1]
+            ynew[j+1], ynew[j] = ynew[j], ynew[j+1]
 
 plt.plot(x, ynew, label="Order 2")
 
@@ -178,14 +186,18 @@ for i in range(n):
     for j in range(m+1):
         y = y+a[j]*(np.power(listx[i], j))
     ynew.append(y)
+print("Parameters of Order", m, ":")
+for i in range(m+1):
+    print("a"+str(i)+" =",round(a[i],4))
 print("regression coefficient of order",m,"is", Regression_Coefficient(listx, listy, n, m))
+print()
 
 x = [i for i in listx]
 for i in range(n):
-    for j in range(n):
-        if x[j]>x[i]:
-            x[i], x[j] = x[j], x[i]
-            ynew[i], ynew[j] = ynew[j], ynew[i]
+    for j in range(n-i-1):
+        if x[j+1]>x[j]:
+            x[j+1], x[j] = x[j], x[j+1]
+            ynew[j+1], ynew[j] = ynew[j], ynew[j+1]
 plt.plot(x, ynew, label="Order 3")
 plt.grid("True")
 plt.legend()
