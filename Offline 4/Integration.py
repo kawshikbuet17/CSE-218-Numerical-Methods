@@ -12,7 +12,7 @@ def simpson_THREE_by_EIGHT(a,b,fx0,fx1,fx2,fx3):
     return (b - a) * (fx0 + 3*fx1 + 3*fx2 +fx3) / 8
 
 
-f = open("input.txt", "r")
+f = open("data1.txt", "r")
 string = f.readline()
 n = int(string)
 
@@ -108,32 +108,32 @@ while i<n-1:
                 ai=ai+2
                 one_by_three+=2
         else:
-            if (c-3)%2==0:
-                c3 = (c-3)//3
-                while c3:
-                    sol += simpson_THREE_by_EIGHT(x[ai], x[ai+3], y[ai], y[ai+1], y[ai+2], y[ai+3])
-                    if v1==1:
-                        plt.fill_between(x[ai:ai+4], y[ai:ai+4], color="MEDIUMPURPLE", label="simpson 3/8 rule")
-                        v1=0
-                    else:
-                        plt.fill_between(x[ai:ai+4], y[ai:ai+4], color="MEDIUMPURPLE")
-                    c3-=1
-                    ai=ai+3
-                    three_by_eight+=3
+            c3 = (c-3)//3
+            c3_b = c3
+            while c3:
+                sol += simpson_THREE_by_EIGHT(x[ai], x[ai+3], y[ai], y[ai+1], y[ai+2], y[ai+3])
+                if v1==1:
+                    plt.fill_between(x[ai:ai+4], y[ai:ai+4], color="MEDIUMPURPLE", label="simpson 3/8 rule")
+                    v1=0
+                else:
+                    plt.fill_between(x[ai:ai+4], y[ai:ai+4], color="MEDIUMPURPLE")
+                c3-=1
+                ai=ai+3
+                three_by_eight+=3
                 
-                c2 = (c-3)//2
-            
-                while c2:
-            
-                    sol += simpson_ONE_by_THREE(x[ai], x[ai+2], y[ai], y[ai+1], y[ai+2])
-                    if v2==1:
-                        plt.fill_between(x[ai:ai+3], y[ai:ai+3], color="LIGHTSKYBLUE", label="simpson 1/3 rule")
-                        v2=0
-                    else:
-                        plt.fill_between(x[ai:ai+3], y[ai:ai+3], color="LIGHTSKYBLUE")
-                    c2-=1
-                    ai=ai+2
-                    one_by_three+=2
+            c = c-c3_b*3
+            c2 = c//2
+        
+            while c2:
+                sol += simpson_ONE_by_THREE(x[ai], x[ai+2], y[ai], y[ai+1], y[ai+2])
+                if v2==1:
+                    plt.fill_between(x[ai:ai+3], y[ai:ai+3], color="LIGHTSKYBLUE", label="simpson 1/3 rule")
+                    v2=0
+                else:
+                    plt.fill_between(x[ai:ai+3], y[ai:ai+3], color="LIGHTSKYBLUE")
+                c2-=1
+                ai=ai+2
+                one_by_three+=2
 
 plt.grid("True")
 plt.xlabel("X value")
@@ -146,18 +146,3 @@ print("1/3 rule:", one_by_three, "intervals")
 print("3/8 rule:", three_by_eight, "intervals")
 print()
 print("Integral value:", sol)
-
-        
-    
-
-
-
-
-
-
-
-
-
-
-
-
