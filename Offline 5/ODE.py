@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+
 pi = 3.1416
 def f(x,y):
     return (x+20*y)*(np.sin(x*y))
@@ -23,11 +24,11 @@ def midpoint(xi, yi, h):
     return RK_2nd(xi, yi, 1, h)
 
 def ralston(xi, yi, h):
-    return RK_2nd(xi, yi, 0.5, h)
+    return RK_2nd(xi, yi, 2/3, h)
 
 def RK_4th(xi,yi,h):
     k1 = f(xi, yi)
-    k2 = f(xi + 0.5*h, yi + 0.5*k1*h)
+    k2 = f(xi + 0.5 * h, yi + 0.5*k1*h)
     k3 = f(xi + 0.5*h, yi +0.5*k2*h)
     k4 = f(xi + h, yi + k3*h)
     return yi + (k1+2*k2+2*k3+k4)*(1/6)*h
@@ -213,10 +214,10 @@ for i in np.arange(0, 10+0.01, 0.01):
     x.append(i)
 for i in range(1, len(x)):
     y.append(euler(x[i-1], y[i-1], 0.01))
-    yhuen.append(huen(x[i-1], y[i-1], 0.01))
-    ymidpoint.append(midpoint(x[i-1], y[i-1], 0.01))
-    yralston.append(ralston(x[i-1], y[i-1], 0.01))
-    yrk4th.append(RK_4th(x[i-1], y[i-1], 0.01))
+    yhuen.append(huen(x[i-1], yhuen[i-1], 0.01))
+    ymidpoint.append(midpoint(x[i-1], ymidpoint[i-1], 0.01))
+    yralston.append(ralston(x[i-1], yralston[i-1], 0.01))
+    yrk4th.append(RK_4th(x[i-1], yrk4th[i-1], 0.01))
 plt.figure(figsize=(15,10))
 plt.plot(x,y, label="EULER")
 plt.plot(x,yhuen, label="HUEN")
@@ -246,10 +247,10 @@ for i in np.arange(0, 10+0.05, 0.05):
     x.append(i)
 for i in range(1, len(x)):
     y.append(euler(x[i-1], y[i-1], 0.05))
-    yhuen.append(huen(x[i-1], y[i-1], 0.05))
-    ymidpoint.append(midpoint(x[i-1], y[i-1], 0.05))
-    yralston.append(ralston(x[i-1], y[i-1], 0.05))
-    yrk4th.append(RK_4th(x[i-1], y[i-1], 0.05))
+    yhuen.append(huen(x[i-1], yhuen[i-1], 0.05))
+    ymidpoint.append(midpoint(x[i-1], ymidpoint[i-1], 0.05))
+    yralston.append(ralston(x[i-1], yralston[i-1], 0.05))
+    yrk4th.append(RK_4th(x[i-1], yrk4th[i-1], 0.05))
 plt.plot(x,y, label="EULER")
 plt.plot(x,yhuen, label="HUEN")
 plt.plot(x,ymidpoint, label="MIDPOINT")
@@ -273,14 +274,16 @@ yhuen.append(4)
 ymidpoint.append(4)
 yralston.append(4)
 yrk4th.append(4)
+
 for i in np.arange(0, 10+0.1, 0.1):
     x.append(i)
+
 for i in range(1, len(x)):
     y.append(euler(x[i-1], y[i-1], 0.1))
-    yhuen.append(huen(x[i-1], y[i-1], 0.1))
-    ymidpoint.append(midpoint(x[i-1], y[i-1], 0.1))
-    yralston.append(ralston(x[i-1], y[i-1], 0.1))
-    yrk4th.append(RK_4th(x[i-1], y[i-1], 0.1))
+    yhuen.append(huen(x[i-1], yhuen[i-1], 0.1))
+    ymidpoint.append(midpoint(x[i-1], ymidpoint[i-1], 0.1))
+    yralston.append(ralston(x[i-1], yralston[i-1], 0.1))
+    yrk4th.append(RK_4th(x[i-1], yrk4th[i-1], 0.1))
 plt.plot(x,y, label="EULER")
 plt.plot(x,yhuen, label="HUEN")
 plt.plot(x,ymidpoint, label="MIDPOINT")
@@ -304,14 +307,16 @@ yhuen.append(4)
 ymidpoint.append(4)
 yralston.append(4)
 yrk4th.append(4)
+
 for i in np.arange(0, 10+0.5, 0.5):
     x.append(i)
+    
 for i in range(1, len(x)):
     y.append(euler(x[i-1], y[i-1], 0.5))
-    yhuen.append(huen(x[i-1], y[i-1], 0.5))
-    ymidpoint.append(midpoint(x[i-1], y[i-1], 0.5))
-    yralston.append(ralston(x[i-1], y[i-1], 0.5))
-    yrk4th.append(RK_4th(x[i-1], y[i-1], 0.5))
+    yhuen.append(huen(x[i-1], yhuen[i-1], 0.5))
+    ymidpoint.append(midpoint(x[i-1], ymidpoint[i-1], 0.5))
+    yralston.append(ralston(x[i-1], yralston[i-1], 0.5))
+    yrk4th.append(RK_4th(x[i-1], yrk4th[i-1], 0.5))
 plt.plot(x,y, label="EULER")
 plt.plot(x,yhuen, label="HUEN")
 plt.plot(x,ymidpoint, label="MIDPOINT")
